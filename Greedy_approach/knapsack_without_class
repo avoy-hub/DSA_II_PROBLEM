@@ -1,0 +1,24 @@
+def fractional_knapsack(value,weight,capacity):
+    items=[]
+    for i in range(len(value)):
+        items.append([value[i],weight[i]])
+    items.sort(key=lambda x:x[0]/x[1],reverse=True)
+    current_weight=0
+    total_profit=0
+    for i in range(len(items)):
+        if current_weight+items[i][1]<=capacity:
+            current_weight+=items[i][1]
+            total_profit+=items[i][0]
+        else:
+            remain=capacity-current_weight
+            fraction=remain*(items[i][0]/items[i][1])
+            total_profit+=fraction
+            break
+    return total_profit
+value=[60,100,200,100]
+weight=[10,50,50,20]
+capacity=90
+profit=fractional_knapsack(value,weight,capacity)
+print(profit)
+
+    
